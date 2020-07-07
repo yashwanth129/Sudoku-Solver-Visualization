@@ -10,6 +10,5 @@ excute sudoku.py
 python3 sudoku.py
 ```
 ---
-press `space` to start solving.
 
 ![screenshot](screen.png)
