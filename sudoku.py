@@ -54,6 +54,8 @@ class Grid:
     # start solving
     def solve_gui(self):
         global speed, board,TD,buttons
+        if len(buttons)==1:
+            buttons.pop()
         events(speed, board,buttons)
 
         find = find_empty(self.model)
@@ -185,7 +187,7 @@ def events(speed,board,buttons):
 
         # updating button
         if event.type == pygame.MOUSEBUTTONDOWN:
-            print("mouse Button Down")
+            # print("mouse Button Down")
             button.mousebuttondown(buttons)
 
     if speed.hit:
