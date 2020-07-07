@@ -29,7 +29,7 @@ class Slider():
         self.txt_rect = self.txt_surf.get_rect(center=(50, 15))
 
         # Static graphics - slider background #
-        self.surf.fill((100, 100, 100))
+        self.surf.fill((50, 50, 50))
         pygame.draw.rect(self.surf, BLACK, [0, 0, 100, 50], 3)
         pygame.draw.rect(self.surf, ORANGE, [10, 10, 80, 10], 0)
         pygame.draw.rect(self.surf, WHITE, [10, 30, 80, 5], 0)

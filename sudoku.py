@@ -1,5 +1,6 @@
 import pygame
 import slider
+import button
 import sys
 
 pygame.font.init()
@@ -52,8 +53,8 @@ class Grid:
 
     # start solving
     def solve_gui(self):
-        global speed, board,TD
-        events(speed, board)
+        global speed, board,TD,buttons
+        events(speed, board,buttons)
 
         find = find_empty(self.model)
         if not find:
@@ -163,7 +164,7 @@ def valid(bo, num, pos):
     return True
 
 
-def events(speed,board):
+def events(speed,board,buttons):
     # execute the events
     global TD
 
@@ -173,10 +174,6 @@ def events(speed,board):
         if event.type == pygame.QUIT:
             sys.exit()
 
-        # start solving
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                board.solve_gui()
 
         # updating slider circle
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -186,28 +183,40 @@ def events(speed,board):
         elif event.type == pygame.MOUSEBUTTONUP:
             speed.hit = False
 
+        # updating button
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            print("mouse Button Down")
+            button.mousebuttondown(buttons)
+
     if speed.hit:
         speed.move()
 
     # refreshing slider
     speed.draw()
 
+    # refreshing buttons
+    for b in buttons:
+        b.draw()
     pygame.display.update()
     TD=310-int(speed.val)
 
     return False
 
+def my_fantastic_function():
+    print("pressed start")
+
 def main():
-    global speed,board
+    global speed,board,buttons
     win = pygame.display.set_mode((540, 600))
     board = Grid(9, 9, 540, 540, win)
     pygame.display.set_caption("Sudoku")
 
     # creating slider
     speed = slider.Slider("Speed", 100, 300, 10, (230,545),win)
-
+    start_button=button.Button(win,"Solve", (100, 570), board.solve_gui )
+    buttons=[start_button]
     while True:
         board.draw()
-        events(speed,board)
+        events(speed,board,buttons)
 
 main()
